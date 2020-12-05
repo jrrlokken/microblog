@@ -3,7 +3,7 @@ import {
   ADD_POST,
   UPDATE_POST,
   REMOVE_POST,
-  VOTES
+  VOTE
 } from '../actions/actionTypes';
 
 const sortByVote = (posts) => {
