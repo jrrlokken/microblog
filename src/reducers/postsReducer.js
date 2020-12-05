@@ -6,9 +6,9 @@ import {
   VOTE,
   ADD_COMMENT,
   REMOVE_COMMENT
-} from './actionTypes';
+} from '../actions/actionTypes';
 
-export default const rootReducer(state = {}, action) {
+export default function rootReducer(state = {}, action) {
   let p = state[action.postId];
 
   switch (action.type) {
