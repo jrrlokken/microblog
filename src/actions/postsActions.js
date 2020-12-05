@@ -9,7 +9,7 @@ import {
   REMOVE_COMMENT
 } from './actionTypes';
 
-const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3000/api/posts";
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000/api/posts";
 
 export const getPostFromAPI = (id) => {
   return async function (dispatch) {
@@ -25,7 +25,7 @@ const getPost = (post) => {
   };
 }
 
-export const sendPostToAPI = (title, description, body) {
+export const sendPostToAPI = (title, description, body) => {
   return async function (dispatch) {
     const response = await axios.post(`${API_URL}`, {
       title,
@@ -43,7 +43,7 @@ const addPost = (post) => {
   };
 }
 
-export const removePostFromAPI = (id) {
+export const removePostFromAPI = (id) => {
   return async function (dispatch) {
     const response = await axios.delete(`${API_URL}/${id}`);
     return dispatch(removePost(response.data));
@@ -57,7 +57,7 @@ const removePost = (postId) => {
   };
 }
 
-export const updatePostInAPI = (id, title, description, body) {
+export const updatePostInAPI = (id, title, description, body) => {
   return async function (dispatch) {
     const response = await axios.put(`${API_URL}/${id}`, {
       title,
@@ -75,7 +75,7 @@ const updatePost = (post) => {
   };
 }
 
-export const sendVoteToAPI = (id, direction) {
+export const sendVoteToAPI = (id, direction) => {
   return async function (dispatch) {
     const response = await axios.post(`${API_URL}/${id}/vote/${direction}`);
     return dispatch(vote(id, response.data.votes));
@@ -90,7 +90,7 @@ const vote = (postId, votes) => {
   };
 }
 
-export const sendCommentToAPI = (postId, text) {
+export const sendCommentToAPI = (postId, text) => {
   return async function (dispatch) {
     const response = await axios.post(`${API_URL}/${postId}/comments/`, { text });
     return dispatch(addComment(postId, response.data));
@@ -105,9 +105,9 @@ const addComment = (postId, comment) => {
   }
 }
 
-export const removeCommentFromAPI = (postId, commentId) {
+export const removeCommentFromAPI = (postId, commentId) => {
   return async function (dispatch) {
-    await axios.post(`${API_URL}/${postId}/comments/${commentId}`);
+    await axios.delete(`${API_URL}/${postId}/comments/${commentId}`);
     return dispatch(removeComment(postId, commentId));
   };
 }
