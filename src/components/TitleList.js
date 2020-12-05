@@ -18,7 +18,7 @@ const TitleList = () => {
     if (isLoading) {
       fetchTitle();
     }
-  }, [dispatch, isLoading]);
+  }, [dispatch, isLoading, titles]);
 
   const vote = (direction, id) => {
     dispatch(sendVoteToAPI(id, direction));
