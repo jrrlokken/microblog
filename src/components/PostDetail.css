@@ -1,0 +1,15 @@
+.PostDetail {
+  position: relative;
+}
+
+.PostDetail-right {
+  position: absolute;
+  right: 0;
+  top: 1em;
+  text-align: right;
+}
+
+.PostDetail-right i {
+  margin-left: 1em;
+  cursor: pointer;
+}

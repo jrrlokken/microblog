@@ -1,8 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { fetchTitlesFromAPI } from '../actions/titlesActions';
 import { Link } from 'react-router-dom';
+import { sendVoteToAPI } from '../actions/postsActions';
 
-const PostList = () => {
+const TitleList = () => {
   const titles = useSelector(st => st.titles);
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
@@ -25,7 +27,7 @@ const PostList = () => {
   if (isLoading) return <b>Loading...</b>;
 
   if (!isLoading && titles.length === 0) {
-    return <b>Add a Post</b>;
+    return <b>Please add a post</b>;
   }
 
   return (
@@ -35,14 +37,18 @@ const PostList = () => {
           <div className="card">
             <div className="card-body">
               <div className="card-title">
-                <Link to={'/' + title.id}>{title.title}</Link>
+                <Link to={"/" + title.id}>{title.title}</Link>
               </div>
               <div className="card-text">
-                <p>{title.description}</p>
+                <i>{title.description}</i>
               </div>
             </div>
             <div className="card-footer">
               <small>{title.votes} votes</small>
+              <i className="fas fa-thumbs-up text-success ml-2"
+                  onClick={event => vote("up", title.id)} />
+              <i className="fas fa-thumbs-down text-danger ml-2"
+                  onClick={event => vote("down", title.id)} />
             </div>
           </div>
         </div>
@@ -51,4 +57,4 @@ const PostList = () => {
   );
 }
 
-export default PostList;
+export default TitleList;
